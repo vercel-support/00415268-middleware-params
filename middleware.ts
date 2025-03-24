@@ -15,7 +15,12 @@ export function middleware(request: NextRequest) {
 		console.log("fixed url", url);
 		console.log("url.href", url.href);
 		console.log("url.toString()", url.toString());
-		return Response.redirect(url, 307);
+		return new NextResponse(null, {
+			headers: {
+				location: url.href
+			},
+			status: 307
+		});
 	}
 
 	return NextResponse.next();
