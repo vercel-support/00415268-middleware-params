@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
 
 	if (
 		hostName ===
-		"00415268-middleware-params-git-main.preview.vercel-support.app"
+		"00415268-middleware-params-git-main.preview.vercel-support.app" || hostName === 'localhost'
 	) {
 		const url = request.nextUrl.clone();
 		console.log("url", url);
@@ -15,9 +15,9 @@ export function middleware(request: NextRequest) {
 		console.log("fixed url", url);
 		console.log("url.href", url.href);
 		console.log("url.toString()", url.toString());
-		return new NextResponse(null, {
+		return new Response(null, {
 			headers: {
-				location: url.href
+				location: url.href.replace(/\:\d+/, '')
 			},
 			status: 307
 		});
